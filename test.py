@@ -34,7 +34,15 @@ auth.set_access_token(tokens['access_token'], tokens['access_token_secret'])
 # Creation of the actual interface, using authentication
 api = tweepy.API(auth)
 
-user_file = open('med2tweets.json',WRITE)
-json.dump([serialize_tweepy_object(tweet) 
-        for tweet in tweepy.Cursor(api.search, q=('#med2'), since='2014-09-16', until='2014-11-02').items(3)], user_file)
+for tweet in tweepy.Cursor(api.search, q=('#med2'), since='2014-09-16', until='2014-11-02').items(3):
 
+    print '%s --- aka @ %s --- at %s' % (tweet.author.name.encode('utf8'), tweet.author.screen_name.encode('utf8'), tweet.created_at)
+    print "\n"
+    print "Tweet:", tweet.text.encode('utf8')
+    print "\n"
+    print 'Retweeted? %s   Favorited? %s' % (tweet.retweeted, tweet.favorited)
+    print "\n"
+    print 'Location? %s    Time Zone? %s    Geo-coded?  %s' % (tweet.user.location.encode('utf8'), tweet.user.time_zone, tweet.geo)
+    print "\n"
+    print "-------------------------------"
+    print "\n"
