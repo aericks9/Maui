@@ -12,4 +12,8 @@ hashtags = [word for tweet in tweets for word in tweet['text'][TEXT].split() if 
 
 #Which tweet is most popular? (Which tweet has the most retweets?)
 #Need retweet field from Twitter
-print tweets
+#print tweets
+
+#Get location from tweet
+locations = [tweet['location'] for tweet in tweets]
+print locations
