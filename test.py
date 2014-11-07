@@ -3,6 +3,8 @@ import tweepy, io, json
 from getpass import getpass
 
 def serialize_tweepy_object(obj):
+
+    print obj.keys,'.......'
     tweet = {}
     tweet['author-name'] = obj.author.name.encode('utf8')
     tweet['screen-name'] = obj.author.screen_name.encode('utf8')
