@@ -5,3 +5,5 @@ pip install matplotlib
 pip install pygeocoder
 pip install nltk
 pip install us
+pip install textstat
+pip install geopy
