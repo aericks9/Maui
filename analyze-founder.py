@@ -8,7 +8,7 @@ def serialize_tweepy_object(obj):
     tweet['author-name'] = obj.author.name.encode('utf8')
     tweet['screen-name'] = obj.author.screen_name.encode('utf8')
     tweet['created-at'] = obj.created_at.strftime('%m-%d-%Y')
-    tweet['text'] = "Tweet:", obj.text.encode('utf8')
+    tweet['text'] = obj.text.encode('utf8')
     
     text = obj.text.encode('utf8')
     words = ''.join(c if c.isalnum() else ' ' for c in text).split()
@@ -20,6 +20,9 @@ def serialize_tweepy_object(obj):
     tweet['location'] = obj.user.location.encode('utf8')
     tweet['time-zone'] = obj.user.time_zone
     tweet['isGeo'] = obj.geo
+
+    tweet['retweet_count'] = obj.retweet_count
+    tweet['favorite_count'] = obj.favorite_count
 
     return tweet
 
@@ -36,6 +39,15 @@ auth.set_access_token(tokens['access_token'], tokens['access_token_secret'])
 api = tweepy.API(auth)
 
 user_file = open('usertimeline.json',WRITE)
-json.dump([serialize_tweepy_object(tweet) 
-        for tweet in tweepy.Cursor(api.user_timeline, id="ev", include_rts=False).items(10)], user_file)
+user_text_file = open('usertimeline.txt','a')
+user_excel_file = open('usertimeline.csv','a')
+json_list = []
+for tweet in tweepy.Cursor(api.user_timeline, id="ev", include_rts=False).items(10):
+    tweet = serialize_tweepy_object(tweet)
+    json_list.append(tweet)
+
+    user_text_file.write(tweet['text'] + '\n')
+    user_excel_file.write(str(tweet['author-name']) + '|' + tweet['text'] + '|' + str(tweet['location']) + '|' + str(tweet['retweet_count']) + '|' + str(tweet['favorite_count']) + '\n')
+
+json.dump(json_list,user_file)
 
