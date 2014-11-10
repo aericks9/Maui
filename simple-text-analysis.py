@@ -1,7 +1,6 @@
 import json
 
 from textstat.textstat import textstat
-from nltk.corpus import stopwords
 
 filename = 'usertimeline.json'
 READ = 'rb'
