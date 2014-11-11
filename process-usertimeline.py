@@ -3,7 +3,6 @@ import json, tweepy
 filename = 'usertimeline.json'
 READ = 'rb'
 tweets = json.load(open(filename,READ))
-
 #Which hashtags were used?
 
 # Consumer keys and access tokens, used for OAuth

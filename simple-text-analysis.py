@@ -5,6 +5,7 @@ from textstat.textstat import textstat
 filename = 'usertimeline.json'
 READ = 'rb'
 TEXT=1
+stopwords = [word.rstrip('\r\n').strip() for word in open('stopwords',READ).readlines()]
 
 tweets = json.load(open(filename,READ))
 #Identify retweets
@@ -23,9 +24,17 @@ lex_div = lambda text: len(text.split())/float(len(set(text.split())))
 print [lex_div(tweet['text'][TEXT]) for tweet in tweets]
 
 #F-K
-print [textstat.flesch_kincaid_grade(tweet['text'][TEXT]) for tweet in tweets]
 
+FK = []
+for tweet in tweets:
+	print tweet['text']
+	try:
+		FK.append(textstat.flesch_kincaid_grade(tweet['text']))
+	except:
+		FK.append(None)
+
+print 'FK:', FK
 #remove stopwords
-print [[word for word in tweet['text'][TEXT].split() if word not in stopwords.words('english') ] for tweet in tweets]
+print 'Removed stopwords:', [[word for word in tweet['text'].split() if word not in stopwords] for tweet in tweets]
 #What's another way to filter out stopwords?
 #How to handle punctuation?
