@@ -36,7 +36,7 @@ auth.set_access_token(tokens['access_token'], tokens['access_token_secret'])
 # Creation of the actual interface, using authentication
 api = tweepy.API(auth)
 
-for tweet in tweepy.Cursor(api.search, q=('#med2'), since='2014-09-16', until='2014-11-02').items(3):
+for tweet in tweepy.Cursor(api.search, q=('#med2'), since='2014-11-05', until='2014-11-1').items(3):
 
     print '%s --- aka @ %s --- at %s' % (tweet.author.name.encode('utf8'), tweet.author.screen_name.encode('utf8'), tweet.created_at)
     print "\n"
