@@ -5,7 +5,8 @@ WRITE = 'wb'
 READ = 'rb'
 
 #corpus = json.load(open('bieber-raw-test.json',READ))
-corpus = json.load(open('sxsw-SXSW-#SXSW-#sxsw-20140308-001535.json',READ))
+corpus = json.load(open('#birthday-birthday-20140626-082517.json',READ))
+#corpus = json.load(open('sxsw-SXSW-#SXSW-#sxsw-20140308-001535.json',READ))
 def get_location(tweet):
 	if tweet['coordinates']:
 		lat,lon = tuple(tweet['coordinates']['coordinates'])
@@ -17,7 +18,6 @@ def get_location(tweet):
 			pass
 	elif tweet['place']:
 		return tweet['place']['full_name'].split(',')[-1].strip()
-
 print 'Hi'
 locations = [get_location(tweet) for tweet in corpus] 
 print filter(None,locations)
@@ -25,7 +25,7 @@ states = [state.name for state in us.states.STATES]
 prevalence = {state:count for state,count in zip(states,[locations.count(state) for state in states])}
 print prevalence
 
-with open('prevalence.csv', 'wb') as f:
+with open('prevalence-birthday.csv', 'wb') as f:
 	print>>f,'name,prevalence'
 	for state,count in prevalence.items():
 		print>>f,'%s,%d'%(state,count)
