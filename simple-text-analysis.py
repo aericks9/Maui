@@ -5,13 +5,13 @@ from textstat.textstat import textstat
 filename = 'usertimeline.json'
 READ = 'rb'
 TEXT=1
-stopwords = [word.rstrip('\r\n').strip() for word in open('stopwords',READ).readlines()]
-
+stopwords = open('stopwords',READ).read().splitlines()
 tweets = json.load(open(filename,READ))
 #Identify retweets
-retweets = [word for tweet in tweets for word in tweet['text'][TEXT] if 'RT' in word]
+retweets = [word for tweet in tweets for word in tweet['text'] if 'RT' in word] 
+#How could one identify retweets better?
 
-print retweets
+print 'Retweets: ',retweets
 #identify replies
 
 #Word count
