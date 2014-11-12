@@ -4,6 +4,7 @@ from getpass import getpass
 
 def serialize_tweepy_object(obj):
     tweet = {}
+    tweet['id'] = obj.id 
     tweet['retweet_count'] = len(api.retweets(obj.id)) #Ceiling effect because max is 100
     tweet['author-name'] = obj.author.name.encode('utf8')
     tweet['screen-name'] = obj.author.screen_name.encode('utf8')
