@@ -7,3 +7,4 @@ pip install nltk
 pip install us
 pip install textstat
 pip install geopy
+pip install blessings
